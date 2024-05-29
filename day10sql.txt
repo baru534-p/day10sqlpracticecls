@@ -1,0 +1,317 @@
+
+SELECT * from EMPLOYEE where name like '%a%';
+
+select * from employee;
+
+select round(100.23456,3) from dual;
+
+select round(100.23456) from dual;
+
+select round(100.63456) from dual;
+
+select id, name , sal , sal/30 , round(sal/30,2) , round(sal/30) from employee;
+
+select trunc(100.2345,2) from dual;
+
+select mod(10,2) from dual;
+
+select mod(11,2) from dual;
+
+select mod(14,5) from dual;
+
+select upper( 'mohit') from dual;
+
+select id,name,upper(name) from employee;
+
+select * from employee where length(name) > 5;
+
+select * from employee where length(name) = 5;
+
+select id,name, dept, lpad(dept,10,'*') , rpad(dept,10,'*') from employee;
+
+select id,name, replace(name, 'a','j') from employee;
+
+select * from dual;
+
+select instr('asourab','a') from dual;
+
+alter table employee add doj date;
+
+alter table employee add dob date;
+
+select * from employee;
+
+update employee set dob='10-jan-1999',doj='11-oct-2023' where id=1;
+
+update employee set dob='15-feb-2000',doj='16-aug-2023' where id=2;
+
+update employee set dob='09-april-1999',doj='11-may-2023' where id=3;
+
+insert into employee values(10,'sachin',40000,25,'hr','10-jan-1998','11-oct-20');
+
+insert into employee values(11,'virat',40000,25,'hr','10-feb-1998','11-oct-20');
+
+
+insert into employee values(12,'doni',40000,25,'hr','11-feb-1998','11-oct-21');
+
+rollback;
+
+commit;
+
+
+
+
+create table chennaioffice
+(
+id number(10),
+name varchar(30),
+age number(10)
+)
+
+
+
+create table bangloreoffice
+(
+id number(10),
+name varchar(30),
+age number(10)
+)
+
+insert into bangloreoffice values(1,'ravi',25);
+insert into bangloreoffice values(2,'ankit',29);
+insert into bangloreoffice values(3,'manas',26);
+insert into bangloreoffice values(4,'sourab',30);
+
+insert into chennaioffice values(1,'ravi',25);
+insert into chennaioffice values(2,'ankit',29);
+insert into chennaioffice values(3,'manas',26);
+insert into chennaioffice values(4,'souran',30);
+
+
+select * from bangloreoffice
+union all
+select * from chennaioffice;
+
+select * from bangloreoffice
+union 
+select * from chennaioffice;
+
+select * from bangloreoffice
+intersect 
+select * from chennaioffice;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+create sequence empid_sequence
+min value 1
+start with 1
+increment by 1;
+
+create table employee11
+(
+id number(10) primary key,
+name varchar2(30),
+age number(10),
+dept varchar2(30)
+);
+
+insert into employee values(empid_sequence.nextval,'sachin',30,'hr');
+insert into employee11 values(empid_sequence.nextval,'ravi',32,'developer');
+
+select * from employee11;
+
+
+select * from employee;
+
+create view hrlistview as
+select * from employee where dept='hr';
+
+select * from hrlistview;
+select id,name,age from hrlistview;
+
+create view hrview2 as
+select id,name,dob from employee where dept='hr';
+
+select * from hrview2;
+
+select id,name,sal,
+rank() over(order by sal) as rank
+from employee;
+
+select id,name,sal,
+rank() over(order by sal) as giving_rank_based_on_sal
+from employee;
+
+
+select id,name,sal,
+rank() over(order by sal desc) as giving_rank_based_on_sal
+from employee;
+
+select id,name,dept,sal,
+rank() over(partition by dept order by sal) as giving_rank_based_on_sal
+from employee;
+
+select id,name,sal
+        from (select id,name,dept,sal, rank() over(order by sal ) as giving_rank_based_on_sal
+from employee
+) emprank where giving_rank_based_on_sal=2;
+
+select * from
+(
+select id,name,dept,sal, rank() over(order by sal desc) as giving_rank_based_on_sal
+from employee
+)emp
+where giving_rank_based_on_sal=5;
+
+select id,name,dept,sal,
+rank() over(order by sal desc) as emprank
+from employee;
+
+select id,name,dept,sal,
+dense_rank() over(order by sal desc) as emprank
+from employee;
+
+select id,name,dept,sal,
+row_number() over(order by id) as myrowid
+from employee;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
